@@ -12,7 +12,7 @@ function Zip {
 	param([string]$name)
 	set-alias sz "$env:ProgramFiles\7-Zip\7z.exe"
 	Write-Host "`n Compressioning backup:"
-	sz a -tzip $name "C:\ZeusDataBackUp"
+	sz a -tzip $name "path to compress"
 	Write-Host "`n success!"
 }
 
@@ -44,11 +44,11 @@ Get-Process | Where-Object { $_.Name -eq "powershell" } | Select-Object -First 1
 # Variables del sistema para realizar el backup
 $date = Get-Date -Format d-MMMM-yyyy
 $zipFileName = "C:\$date.zip" 
-$server = "130.103.97.7"
-$destination = "Microsoft.PowerShell.Core\FileSystem::\\zeus10\C$\Shared\BackupBases\$server"
+$server = "server ip"
+$destination = "Microsoft.PowerShell.Core\FileSystem::path to remote\$server"
 
 # Ejecuta script SqlCmd
-Execute-Sql "$PSScriptRoot\BackUp_DataBase_Ligera_Clubes.sql"
+Execute-Sql "$PSScriptRoot\somedatabase.sql"
 
 # Realiza compresión de archivos
 Zip $zipFileName
